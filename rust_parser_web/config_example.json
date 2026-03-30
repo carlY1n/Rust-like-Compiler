@@ -1,0 +1,10 @@
+{
+  "enable_warnings": true,
+  "enable_optimization": true,
+  "optimization_level": "BASIC",
+  "strict_type_checking": true,
+  "warn_unused_variables": true,
+  "warn_type_mismatch": true,
+  "enable_constant_folding": true,
+  "enable_dead_code_elimination": true
+}

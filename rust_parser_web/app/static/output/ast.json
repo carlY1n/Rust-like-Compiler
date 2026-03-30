@@ -1,0 +1,267 @@
+{
+  "type": "program",
+  "declarations": [
+    {
+      "type": "function_header",
+      "name": "test_semantic",
+      "parameters": [],
+      "body": {
+        "type": "statement_block",
+        "statements": [
+          {
+            "type": "variable_declaration_statement",
+            "variable": {
+              "type": "variable_declaration_inner",
+              "mutable": true,
+              "identifier": "a"
+            },
+            "var_type": {
+              "type": "type_specifier",
+              "value": "i32"
+            },
+            "initializer": {
+              "type": "number_literal",
+              "value": 5
+            }
+          },
+          {
+            "type": "variable_declaration_statement",
+            "variable": {
+              "type": "variable_declaration_inner",
+              "mutable": false,
+              "identifier": "b"
+            },
+            "var_type": {
+              "type": "type_specifier",
+              "value": "i32"
+            },
+            "initializer": {
+              "type": "number_literal",
+              "value": 10
+            }
+          },
+          {
+            "type": "variable_declaration_statement",
+            "variable": {
+              "type": "variable_declaration_inner",
+              "mutable": false,
+              "identifier": "c"
+            },
+            "initializer": {
+              "type": "binary_expression",
+              "operator": "+",
+              "left": {
+                "type": "identifier",
+                "name": "a"
+              },
+              "right": {
+                "type": "identifier",
+                "name": "b"
+              }
+            }
+          },
+          {
+            "type": "variable_declaration_statement",
+            "variable": {
+              "type": "variable_declaration_inner",
+              "mutable": false,
+              "identifier": "d"
+            },
+            "initializer": {
+              "type": "binary_expression",
+              "operator": "*",
+              "left": {
+                "type": "identifier",
+                "name": "a"
+              },
+              "right": {
+                "type": "identifier",
+                "name": "b"
+              }
+            }
+          },
+          {
+            "type": "if_statement",
+            "condition": {
+              "type": "binary_expression",
+              "operator": ">",
+              "left": {
+                "type": "identifier",
+                "name": "a"
+              },
+              "right": {
+                "type": "identifier",
+                "name": "b"
+              }
+            },
+            "then_branch": {
+              "type": "statement_block",
+              "statements": [
+                {
+                  "type": "variable_declaration_statement",
+                  "variable": {
+                    "type": "variable_declaration_inner",
+                    "mutable": false,
+                    "identifier": "e"
+                  },
+                  "initializer": {
+                    "type": "binary_expression",
+                    "operator": "-",
+                    "left": {
+                      "type": "identifier",
+                      "name": "a"
+                    },
+                    "right": {
+                      "type": "identifier",
+                      "name": "b"
+                    }
+                  }
+                }
+              ]
+            },
+            "else_branch": {
+              "type": "statement_block",
+              "statements": [
+                {
+                  "type": "variable_declaration_statement",
+                  "variable": {
+                    "type": "variable_declaration_inner",
+                    "mutable": false,
+                    "identifier": "e"
+                  },
+                  "initializer": {
+                    "type": "binary_expression",
+                    "operator": "-",
+                    "left": {
+                      "type": "identifier",
+                      "name": "b"
+                    },
+                    "right": {
+                      "type": "identifier",
+                      "name": "a"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "while_statement",
+            "condition": {
+              "type": "binary_expression",
+              "operator": "<",
+              "left": {
+                "type": "identifier",
+                "name": "a"
+              },
+              "right": {
+                "type": "number_literal",
+                "value": 10
+              }
+            },
+            "body": {
+              "type": "statement_block",
+              "statements": [
+                {
+                  "type": "assignment_statement",
+                  "target": {
+                    "type": "assignable_element",
+                    "identifier": "a"
+                  },
+                  "expression": {
+                    "type": "binary_expression",
+                    "operator": "+",
+                    "left": {
+                      "type": "identifier",
+                      "name": "a"
+                    },
+                    "right": {
+                      "type": "number_literal",
+                      "value": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "variable_declaration_statement",
+            "variable": {
+              "type": "variable_declaration_inner",
+              "mutable": false,
+              "identifier": "result"
+            },
+            "initializer": {
+              "type": "function_call",
+              "function": "add",
+              "arguments": [
+                {
+                  "type": "identifier",
+                  "name": "a"
+                },
+                {
+                  "type": "identifier",
+                  "name": "b"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "function_header",
+      "name": "add",
+      "parameters": [
+        {
+          "type": "parameter",
+          "variable": {
+            "type": "variable_declaration_inner",
+            "mutable": false,
+            "identifier": "x"
+          },
+          "param_type": {
+            "type": "type_specifier",
+            "value": "i32"
+          }
+        },
+        {
+          "type": "parameter",
+          "variable": {
+            "type": "variable_declaration_inner",
+            "mutable": false,
+            "identifier": "y"
+          },
+          "param_type": {
+            "type": "type_specifier",
+            "value": "i32"
+          }
+        }
+      ],
+      "return_type": {
+        "type": "type_specifier",
+        "value": "i32"
+      },
+      "body": {
+        "type": "statement_block",
+        "statements": [
+          {
+            "type": "return_statement",
+            "expression": {
+              "type": "binary_expression",
+              "operator": "+",
+              "left": {
+                "type": "identifier",
+                "name": "x"
+              },
+              "right": {
+                "type": "identifier",
+                "name": "y"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

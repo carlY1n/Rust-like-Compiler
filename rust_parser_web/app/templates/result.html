@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rust Parser Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .quadruple-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .quadruple-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .quadruple-table th, .quadruple-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .quadruple-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .quadruple-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .function-name {
+            font-weight: bold;
+            color: #2196F3;
+            margin: 15px 0 5px 0;
+        }
+        .quadruple-index {
+            color: #666;
+            font-family: monospace;
+        }
+        .token-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .token-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .token-table th, .token-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .token-table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .tree-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        #ast-container {
+            width: 100%;
+            overflow: auto;
+        }
+        #ast-wrapper {
+            min-width: 100%;
+            min-height: 400px;
+        }
+        .download-btn {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .download-btn:hover {
+            background-color: #45a049;
+        }
+        
+        /* 目标代码显示样式 */
+        .target-code-container {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        .target-code {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+            white-space: pre;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h1>类Rust语言编译器</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".rs" required>
+        <button type="submit">上传文件并分析</button>
+    </form>
+
+    <h2>词法分析结果</h2>
+    <div class="token-container">
+        <table class="token-table">
+            <thead>
+                <tr>
+                    <th>Token</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for line in tokens %}
+                {% set parts = line.split('] "') %}
+                {% if parts|length > 1 %}
+                    {% set type = parts[0].split('[')[1] %}
+                    {% set token = parts[1].split('"')[0] %}
+                    <tr>
+                        <td>{{ token }}</td>
+                        <td>{{ type }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <h2>语法分析结果</h2>
+    <div class="tree-container">
+        <div id="ast-container">
+            <div id="ast-wrapper">
+                <div id="ast"></div>
+            </div>
+        </div>
+        <button id="download-svg" class="download-btn">保存为SVG</button>
+    </div>
+
+    <h2>语义分析结果（四元式）</h2>
+    <div class="quadruple-container">
+        {% if quadruples %}
+            {% for func_name, quads in quadruples.items() %}
+                <div class="function-name">{{ func_name }} 函数:</div>
+                <table class="quadruple-table">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>操作符</th>
+                            <th>操作数1</th>
+                            <th>操作数2</th>
+                            <th>结果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for quad in quads %}
+                            <tr>
+                                <td class="quadruple-index">{{ loop.index0 }}</td>
+                                <td>{{ quad.op }}</td>
+                                <td>{{ quad.arg1 }}</td>
+                                <td>{{ quad.arg2 }}</td>
+                                <td>{{ quad.result }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endfor %}
+        {% else %}
+            <p>没有生成四元式</p>
+        {% endif %}
+    </div>
+
+    <!-- 新增：目标代码生成结果 -->
+    <h2>目标代码生成结果</h2>
+    <div class="target-code-container">
+        {% if target_code %}
+            <div class="target-code">{{ target_code }}</div>
+        {% else %}
+            <p>没有生成目标代码</p>
+        {% endif %}
+    </div>
+
+    <script>
+        const astData = JSON.parse('{{ ast | tojson | safe }}');
+    </script>
+    <script src="{{ url_for('static', filename='ast_viewer.js') }}"></script>
+</body>
+</html>

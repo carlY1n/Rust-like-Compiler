@@ -1,0 +1,186 @@
+{
+  "test_semantic": [
+    {
+      "op": "label",
+      "arg1": "func_test_semantic",
+      "arg2": "_",
+      "result": "_"
+    },
+    {
+      "op": "=",
+      "arg1": "5",
+      "arg2": "_",
+      "result": "a"
+    },
+    {
+      "op": "=",
+      "arg1": "10",
+      "arg2": "_",
+      "result": "b"
+    },
+    {
+      "op": "+",
+      "arg1": "a",
+      "arg2": "b",
+      "result": "t0"
+    },
+    {
+      "op": "=",
+      "arg1": "t0",
+      "arg2": "_",
+      "result": "c"
+    },
+    {
+      "op": "*",
+      "arg1": "a",
+      "arg2": "b",
+      "result": "t1"
+    },
+    {
+      "op": "=",
+      "arg1": "t1",
+      "arg2": "_",
+      "result": "d"
+    },
+    {
+      "op": ">",
+      "arg1": "a",
+      "arg2": "b",
+      "result": "t2"
+    },
+    {
+      "op": "if_false",
+      "arg1": "t2",
+      "arg2": "_",
+      "result": "L0"
+    },
+    {
+      "op": "-",
+      "arg1": "a",
+      "arg2": "b",
+      "result": "t0"
+    },
+    {
+      "op": "=",
+      "arg1": "t0",
+      "arg2": "_",
+      "result": "e"
+    },
+    {
+      "op": "goto",
+      "arg1": "_",
+      "arg2": "_",
+      "result": "L1"
+    },
+    {
+      "op": "label",
+      "arg1": "L0",
+      "arg2": "_",
+      "result": "_"
+    },
+    {
+      "op": "-",
+      "arg1": "b",
+      "arg2": "a",
+      "result": "t0"
+    },
+    {
+      "op": "=",
+      "arg1": "t0",
+      "arg2": "_",
+      "result": "e"
+    },
+    {
+      "op": "label",
+      "arg1": "L1",
+      "arg2": "_",
+      "result": "_"
+    },
+    {
+      "op": "label",
+      "arg1": "L2",
+      "arg2": "_",
+      "result": "_"
+    },
+    {
+      "op": "<",
+      "arg1": "a",
+      "arg2": "10",
+      "result": "t3"
+    },
+    {
+      "op": "if_false",
+      "arg1": "t3",
+      "arg2": "_",
+      "result": "L3"
+    },
+    {
+      "op": "+",
+      "arg1": "a",
+      "arg2": "1",
+      "result": "t0"
+    },
+    {
+      "op": "=",
+      "arg1": "t0",
+      "arg2": "_",
+      "result": "a"
+    },
+    {
+      "op": "goto",
+      "arg1": "_",
+      "arg2": "_",
+      "result": "L2"
+    },
+    {
+      "op": "label",
+      "arg1": "L3",
+      "arg2": "_",
+      "result": "_"
+    },
+    {
+      "op": "param",
+      "arg1": "a",
+      "arg2": "_",
+      "result": "_"
+    },
+    {
+      "op": "param",
+      "arg1": "b",
+      "arg2": "_",
+      "result": "_"
+    },
+    {
+      "op": "call",
+      "arg1": "func_add",
+      "arg2": "2",
+      "result": "t4"
+    },
+    {
+      "op": "=",
+      "arg1": "t4",
+      "arg2": "_",
+      "result": "result"
+    }
+  ],
+  "add": [
+    {
+      "op": "label",
+      "arg1": "func_add",
+      "arg2": "_",
+      "result": "_"
+    },
+    {
+      "op": "+",
+      "arg1": "x",
+      "arg2": "y",
+      "result": "t0"
+    },
+    {
+      "op": "return",
+      "arg1": "t0",
+      "arg2": "_",
+      "result": "_"
+    }
+  ]
+}
